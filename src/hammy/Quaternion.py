@@ -446,17 +446,6 @@ class Quaternion:
         
         return angles
 
-    def tolist(self) -> list:
-        """
-        Convert quaternion data to a Python list.
-
-        Returns
-        -------
-        list
-            List representation of the quaternion array.
-        """
-        return self.ndarray.tolist()
-
     def vector_norm(self) -> NDArray | float:
         """
         L2 norm of the vector component of the quaternion.
@@ -469,6 +458,39 @@ class Quaternion:
         if self.num_quaternions == 1:
             return float(np.linalg.norm(self._vector[0]))
         return np.linalg.norm(self._vector, axis=1)
+
+    def normalise(self) -> 'Quaternion':
+        """
+        Return a normalised (unit) quaternion.
+
+        Returns
+        -------
+        Quaternion
+            A new Quaternion object normalized to unit length.
+        """
+        return Quaternion(normalise(self.ndarray))
+
+    def normalize(self) -> 'Quaternion':
+        """
+        Return a normalised (unit) quaternion (alias for normalise).
+
+        Returns
+        -------
+        Quaternion
+            A new Quaternion object normalized to unit length.
+        """
+        return self.normalise()
+
+    def tolist(self) -> list:
+        """
+        Convert quaternion data to a Python list.
+
+        Returns
+        -------
+        list
+            List representation of the quaternion array.
+        """
+        return self.ndarray.tolist()
 
     def __getitem__(self, item: int | slice) -> NDArray:
         """
@@ -523,28 +545,6 @@ class Quaternion:
             Array representation of the quaternion data.
         """
         return np.array_repr(self.ndarray, precision=6, suppress_small=True)
-
-    def normalise(self) -> 'Quaternion':
-        """
-        Return a normalized (unit) quaternion.
-
-        Returns
-        -------
-        Quaternion
-            A new Quaternion object normalized to unit length.
-        """
-        return Quaternion(normalise(self.ndarray))
-
-    def normalize(self) -> 'Quaternion':
-        """
-        Return a normalized (unit) quaternion (alias for normalise).
-
-        Returns
-        -------
-        Quaternion
-            A new Quaternion object normalized to unit length.
-        """
-        return self.normalise()
 
     def __add__(self, other: 'Quaternion' | NDArray | list | tuple) -> 'Quaternion':
         """
