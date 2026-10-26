@@ -25,12 +25,12 @@ from .utilities import (
     _calc_euler_angles,
     _calc_rotation_mat,
     _calc_tait_bryan_angles,
-    axis_angle_to_quat,
-    compose_quaternion_rotation,
+    _axis_angle_to_quat,
+    _compose_quaternion_rotation,
     normalise,
-    quat_quat_mult,
-    quat_to_axis_angle,
-    spherical_coords_to_quat,
+    _quat_quat_mult,
+    _quat_to_axis_angle,
+    _spherical_coords_to_quat,
 )
 
 
@@ -179,7 +179,7 @@ class Quaternion:
         """
         norm_sq = np.sum(q2.ndarray**2, axis=1, keepdims=True)
         q2_inv = q2.conjugate.ndarray / norm_sq
-        return Quaternion(quat_quat_mult(self.ndarray, q2_inv))
+        return Quaternion(_quat_quat_mult(self.ndarray, q2_inv))
 
     def _multiply_with_quaternion(self, q2):
         """
@@ -195,7 +195,7 @@ class Quaternion:
         Quaternion
             Result of quaternion multiplication.
         """
-        return Quaternion(quat_quat_mult(self.ndarray, q2.ndarray))
+        return Quaternion(_quat_quat_mult(self.ndarray, q2.ndarray))
 
     def _multiply_with_vector(self, vec):
         """
@@ -234,7 +234,7 @@ class Quaternion:
         Quaternion
             A new Quaternion object.
         """
-        return cls(axis_angle_to_quat(v, theta, degrees=degrees))
+        return cls(_axis_angle_to_quat(v, theta, degrees=degrees))
 
     @classmethod
     def from_euler(cls, angles: NDArray, seq: str = 'xyz', degrees: bool = False,
@@ -258,7 +258,7 @@ class Quaternion:
         Quaternion
             A new Quaternion object.
         """
-        return cls(compose_quaternion_rotation(angles, seq=seq, degrees=degrees, intrinsic=intrinsic))
+        return cls(_compose_quaternion_rotation(angles, seq=seq, degrees=degrees, intrinsic=intrinsic))
 
     @classmethod
     def from_spherical(cls, theta: float, phi: float, degrees: bool = False) -> 'Quaternion':
@@ -279,7 +279,7 @@ class Quaternion:
         Quaternion
             A new Quaternion object.
         """
-        return cls(spherical_coords_to_quat(theta, phi, degrees=degrees))
+        return cls(_spherical_coords_to_quat(theta, phi, degrees=degrees))
 
     def get_axis_angle(self, degrees: bool = False) -> tuple[NDArray, NDArray | float]:
         """
@@ -296,7 +296,7 @@ class Quaternion:
             (axis, theta) where axis is the normalized rotation axis vector(s) of shape
             (3,) or (N, 3), and theta is the rotation angle(s) as a float or array of shape (N,).
         """
-        axes, thetas = quat_to_axis_angle(self.ndarray, degrees=degrees)
+        axes, thetas = _quat_to_axis_angle(self.ndarray, degrees=degrees)
 
         if self.num_quaternions == 1:
             return axes[0], thetas[0]
@@ -508,7 +508,7 @@ class Quaternion:
         """
         if self.ndarray is None:
             return "Quaternion(empty)"
-        axes, thetas = quat_to_axis_angle(self.ndarray)
+        axes, thetas = _quat_to_axis_angle(self.ndarray)
         if self.num_quaternions == 1:
             return f"Quaternion({thetas[0]:.6f}; {axes[0]})\n"
         return str([f"Quaternion({theta:.6f}; {axis})\n" for axis, theta in zip(axes, thetas, strict=True)])

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 Quaternion math utilities.
 
@@ -127,8 +126,8 @@ def _axis_angle_to_quat_nb(vec: NDArray, theta: NDArray) -> NDArray:
     return out
 
 
-def axis_angle_to_quat(vec: NDArray | list | tuple, theta: float | NDArray | list | tuple,
-                       degrees: bool = False) -> NDArray:
+def _axis_angle_to_quat(vec: NDArray | list | tuple, theta: float | NDArray | list | tuple,
+                        degrees: bool = False) -> NDArray:
     """
     Convert axis-angle representation to a quaternion.
 
@@ -445,7 +444,7 @@ def _calc_tait_bryan_angles(qarr: NDArray, seq: str, intrinsic: bool = True) -> 
     return m
 
 
-def spherical_coords_to_quat(theta: float | NDArray, phi: float | NDArray, degrees: bool = False) -> NDArray:
+def _spherical_coords_to_quat(theta: float | NDArray, phi: float | NDArray, degrees: bool = False) -> NDArray:
     """
     Convert spherical coordinates to a quaternion.
 
@@ -548,7 +547,7 @@ def _quat_single_multiplication(p, q):
 
 
 @njit(cache=True)
-def quat_quat_mult(p, q):
+def _quat_quat_mult(p, q):
     """
     Multiply two quaternion arrays (Numba-jitted).
 
@@ -615,8 +614,8 @@ def _quat_element_calc(axis, angles):
     return quat
 
 
-def compose_quaternion_rotation(angles: NDArray, seq: str = 'xyz', degrees: bool = False,
-                                intrinsic: bool = False) -> NDArray:
+def _compose_quaternion_rotation(angles: NDArray, seq: str = 'xyz', degrees: bool = False,
+                                 intrinsic: bool = False) -> NDArray:
     """
     Compose a quaternion from a sequence of rotations (Euler/Tait-Bryan angles).
 
@@ -646,9 +645,9 @@ def compose_quaternion_rotation(angles: NDArray, seq: str = 'xyz', degrees: bool
 
     for idx in range(1, len(seq)):
         if intrinsic:
-            result = quat_quat_mult(result, _quat_element_calc(seq[idx], angles[:, idx]))
+            result = _quat_quat_mult(result, _quat_element_calc(seq[idx], angles[:, idx]))
         else:
-            result = quat_quat_mult(_quat_element_calc(seq[idx], angles[:, idx]), result)
+            result = _quat_quat_mult(_quat_element_calc(seq[idx], angles[:, idx]), result)
 
     return result
 
@@ -694,7 +693,7 @@ def _quat_to_axis_angle_nb(qarr: NDArray) -> tuple[NDArray, NDArray]:
     return axes, thetas
 
 
-def quat_to_axis_angle(q: NDArray | list | tuple, degrees: bool = False) -> tuple[NDArray, NDArray | float]:
+def _quat_to_axis_angle(q: NDArray | list | tuple, degrees: bool = False) -> tuple[NDArray, NDArray | float]:
     """
     Convert quaternion(s) to axis-angle representation.
 
