@@ -9,12 +9,6 @@ Conventions verified:
 
 __author__ = 'J.P. Morrissey'
 __copyright__ = 'Copyright 2023, {project_name}'
-__credits__ = ['{credit_list}']
-__license__ = '{license}'
-__version__ = '{mayor}.{minor}.{rel}'
-__maintainer__ = 'J.P. Morrissey'
-__email__ = 'j.morrissey@ed.ac.uk'
-__status__ = '{dev_status}'
 
 # Standard Library
 
@@ -51,7 +45,7 @@ def test_compose_quaternion(angle_input, seq_input, expected_output):
                           (angles, 'zyx', np.array([18.671718064007877, 8.972626614896392, 29.582012486893984]))])
 def test_get_tait_bryan(angle_input, seq_input, expected_output):
     r4 = Quaternion.from_euler(angles, seq='xzy')
-    ans = r4.get_tait_bryan(seq=seq_input, degrees=True)
+    ans = r4.to_tait_bryan(seq=seq_input, degrees=True)
     assert np.allclose(ans, expected_output)
 
 @pytest.mark.parametrize("quat_input, seq_input, intrinsic, expected_output",
@@ -69,7 +63,7 @@ def test_get_tait_bryan(angle_input, seq_input, expected_output):
                           (angles, 'zyx', False, np.array([-157.5187063, 19.5007892, -121.276486]))])
 def test_get_tait_bryan_from_quat(quat_input, seq_input, intrinsic, expected_output):
     r5 = Quaternion((-0.05057163, -0.24888186, -0.82628776, -0.50274135))
-    ans = r5.get_tait_bryan(seq=seq_input, degrees=True, intrinsic=intrinsic)
+    ans = r5.to_tait_bryan(seq=seq_input, degrees=True, intrinsic=intrinsic)
     assert np.allclose(ans, expected_output)
 
 
@@ -83,7 +77,7 @@ def test_get_tait_bryan_from_quat(quat_input, seq_input, intrinsic, expected_out
                           (angles, 'zyz', True, np.array([-55.96563734, 30.79461491, 72.26367773]))])
 def test_get_euler(angle_input, seq_input, intrinsic, expected_output):
     r4 = Quaternion.from_euler(angles, seq='xzy')
-    ans = r4.get_euler(seq=seq_input, degrees=True, intrinsic=intrinsic)
+    ans = r4.to_euler(seq=seq_input, degrees=True, intrinsic=intrinsic)
     assert np.allclose(ans, expected_output)
 
 @pytest.mark.parametrize("quat_input, seq_input, intrinsic, expected_output",
@@ -101,13 +95,13 @@ def test_get_euler(angle_input, seq_input, intrinsic, expected_output):
                           (angles, 'zyz', False, np.array([101.0183948, 119.3003178, 67.49328524]))])
 def test_get_euler_from_quat(quat_input, seq_input, intrinsic, expected_output):
     r5 = Quaternion((-0.05057163, -0.24888186, -0.82628776, -0.50274135))
-    ans = r5.get_euler(seq=seq_input, degrees=True, intrinsic=intrinsic)
+    ans = r5.to_euler(seq=seq_input, degrees=True, intrinsic=intrinsic)
     assert np.allclose(ans, expected_output)
 
 
 def test_get_rotation_matrix():
     r4 = Quaternion.from_euler(angles, seq='xzy')
-    ans = r4.get_rotation_matrix()
+    ans = r4.to_rotation_matrix()
     expected_output = np.array([[0.93577544, -0.20547287, 0.28654009],
                                 [0.31622777, 0.84852814, -0.42426407],
                                 [-0.15596257, 0.48762783, 0.85900802]])
@@ -132,7 +126,7 @@ class TestEulerAndTaitBryanConversions:
         """Validate Tait-Bryan angle round-trip invariance across intrinsic and extrinsic modes."""
         test_angles = np.array([15.0, 25.0, 35.0])
         q = Quaternion.from_euler(test_angles, seq=seq, degrees=True, intrinsic=intrinsic)
-        recovered = q.get_tait_bryan(seq=seq, degrees=True, intrinsic=intrinsic)
+        recovered = q.to_tait_bryan(seq=seq, degrees=True, intrinsic=intrinsic)
         q_rec = Quaternion.from_euler(recovered, seq=seq, degrees=True, intrinsic=intrinsic)
 
         v = np.array([1.0, -2.0, 3.5])
@@ -144,7 +138,7 @@ class TestEulerAndTaitBryanConversions:
         """Validate proper Euler angle round-trip invariance across intrinsic and extrinsic modes."""
         test_angles = np.array([20.0, 45.0, 70.0])
         q = Quaternion.from_euler(test_angles, seq=seq, degrees=True, intrinsic=intrinsic)
-        recovered = q.get_euler(seq=seq, degrees=True, intrinsic=intrinsic)
+        recovered = q.to_euler(seq=seq, degrees=True, intrinsic=intrinsic)
         q_rec = Quaternion.from_euler(recovered, seq=seq, degrees=True, intrinsic=intrinsic)
 
         v = np.array([2.0, 1.0, -1.0])
@@ -177,7 +171,7 @@ class TestAxisAngleConversions:
         axis = np.array([0.0, 1.0, 0.0])
         theta = np.pi / 3
         q = Quaternion.from_axisangle(axis, theta)
-        rec_axis, rec_theta = q.get_axis_angle()
+        rec_axis, rec_theta = q.to_axis_angle()
         assert np.allclose(axis, rec_axis)
         assert np.isclose(theta, rec_theta)
 
@@ -186,7 +180,7 @@ class TestAxisAngleConversions:
         axis = np.array([1.0, 0.0, 0.0])
         theta_deg = 45.0
         q = Quaternion.from_axisangle(axis, theta_deg, degrees=True)
-        rec_axis, rec_theta = q.get_axis_angle(degrees=True)
+        rec_axis, rec_theta = q.to_axis_angle(degrees=True)
         assert np.allclose(axis, rec_axis)
         assert np.isclose(theta_deg, rec_theta)
 
@@ -198,7 +192,7 @@ class TestAxisAngleConversions:
         thetas = np.random.uniform(0.1, np.pi - 0.1, size=n)
         q = Quaternion.from_axisangle(axes, thetas)
         assert q.num_quaternions == n
-        rec_axes, rec_thetas = q.get_axis_angle()
+        rec_axes, rec_thetas = q.to_axis_angle()
         assert rec_axes.shape == (n, 3)
         assert rec_thetas.shape == (n,)
 
@@ -214,7 +208,7 @@ class TestAxisAngleConversions:
         thetas = np.array([0.0, np.pi / 4, np.pi / 2, np.pi])
         q = Quaternion.from_axisangle(axis, thetas)
         assert q.num_quaternions == 4
-        rec_axes, rec_thetas = q.get_axis_angle()
+        rec_axes, rec_thetas = q.to_axis_angle()
         assert np.allclose(rec_thetas, thetas)
 
         # Multiple axes, single angle
@@ -222,7 +216,7 @@ class TestAxisAngleConversions:
         theta = np.pi / 2
         q2 = Quaternion.from_axisangle(axes, theta)
         assert q2.num_quaternions == 3
-        rec_axes2, rec_thetas2 = q2.get_axis_angle()
+        rec_axes2, rec_thetas2 = q2.to_axis_angle()
         assert np.allclose(rec_thetas2, [theta, theta, theta])
 
     def test_rotation_vector(self):
@@ -250,12 +244,12 @@ class TestAxisAngleConversions:
         axis_raw = np.array([0.0, 5.0, 0.0])
         theta = np.pi / 2
         q = Quaternion.from_axisangle(axis_raw, theta)
-        rec_axis, rec_theta = q.get_axis_angle()
+        rec_axis, rec_theta = q.to_axis_angle()
         assert np.allclose(rec_axis, [0.0, 1.0, 0.0])
         assert np.isclose(rec_theta, theta)
 
         # Unnormalized quaternion
         q_scaled = Quaternion(q.ndarray * 3.5)
-        rec_axis2, rec_theta2 = q_scaled.get_axis_angle()
+        rec_axis2, rec_theta2 = q_scaled.to_axis_angle()
         assert np.allclose(rec_axis2, [0.0, 1.0, 0.0])
         assert np.isclose(rec_theta2, theta)

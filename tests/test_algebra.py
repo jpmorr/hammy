@@ -9,12 +9,7 @@ Conventions verified:
 
 __author__ = 'J.P. Morrissey'
 __copyright__ = 'Copyright 2023, {project_name}'
-__credits__ = ['{credit_list}']
-__license__ = '{license}'
-__version__ = '{mayor}.{minor}.{rel}'
-__maintainer__ = 'J.P. Morrissey'
-__email__ = 'j.morrissey@ed.ac.uk'
-__status__ = '{dev_status}'
+
 
 # Standard Library
 
@@ -42,7 +37,7 @@ class TestQuaternionAlgebra:
         v = np.array([1.0, 0.0, 0.0])
         expected = np.array([0.0, 1.0, 0.0])
         assert np.allclose(q * v, expected, atol=1e-7)
-        assert np.allclose(q.get_rotation_matrix() @ v, expected, atol=1e-7)
+        assert np.allclose(q.to_rotation_matrix() @ v, expected, atol=1e-7)
 
     def test_component_access_single(self):
         """Validate scalar, vector, and w, x, y, z component access for a single quaternion."""

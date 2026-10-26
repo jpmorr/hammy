@@ -8,7 +8,9 @@ Allows translation between quaternions and Euler angles, Tait-Bryan angles, rota
 representations.
 """
 from __future__ import annotations
+
 from typing import Self
+
 
 __copyright__ = 'Copyright 2023'
 __version__ = '1.0.1'
@@ -23,15 +25,15 @@ from numpy.typing import NDArray
 
 # Local Sources
 from .utilities import (
+    _axis_angle_to_quat,
     _calc_euler_angles,
     _calc_rotation_mat,
     _calc_tait_bryan_angles,
-    _axis_angle_to_quat,
     _compose_quaternion_rotation,
-    normalise,
     _quat_quat_mult,
     _quat_to_axis_angle,
     _spherical_coords_to_quat,
+    normalise, _quat_mult, _quat_div,
 )
 
 
@@ -164,57 +166,6 @@ class Quaternion:
         except np.AxisError:
             return np.linalg.norm(self.ndarray)
 
-    def _divide_by_quaternion(self, q2: 'Quaternion') -> 'Quaternion':
-        """
-        Divide this quaternion by another quaternion.
-
-        Parameters
-        ----------
-        q2 : Quaternion
-            The divisor quaternion.
-
-        Returns
-        -------
-        Quaternion
-            Result of quaternion division.
-        """
-        norm_sq = np.sum(q2.ndarray**2, axis=1, keepdims=True)
-        q2_inv = q2.conjugate.ndarray / norm_sq
-        return Quaternion(_quat_quat_mult(self.ndarray, q2_inv))
-
-    def _multiply_with_quaternion(self, q2):
-        """
-        Multiply this quaternion with another quaternion.
-
-        Parameters
-        ----------
-        q2 : Quaternion
-            The quaternion to multiply with.
-
-        Returns
-        -------
-        Quaternion
-            Result of quaternion multiplication.
-        """
-        return Quaternion(_quat_quat_mult(self.ndarray, q2.ndarray))
-
-    def _multiply_with_vector(self, vec):
-        """
-        Rotate a vector by this quaternion.
-
-        Parameters
-        ----------
-        vec : array-like
-            A 3D vector to rotate.
-
-        Returns
-        -------
-        NDArray
-            The rotated 3D vector.
-        """
-        q2 = Quaternion(vec)
-        return (self * q2 * self.conjugate).ndarray[:, 1:]
-
     @classmethod
     def from_axisangle(cls, v: NDArray | list | tuple, theta: float | NDArray | list | tuple,
                        degrees: bool = False) -> 'Quaternion':
@@ -282,7 +233,7 @@ class Quaternion:
         """
         return cls(_spherical_coords_to_quat(theta, phi, degrees=degrees))
 
-    def get_axis_angle(self, degrees: bool = False) -> tuple[NDArray, NDArray | float]:
+    def to_axis_angle(self, degrees: bool = False) -> tuple[NDArray, NDArray | float]:
         """
         Convert quaternion to axis-angle representation.
 
@@ -313,13 +264,13 @@ class Quaternion:
             Rotation vector of shape (3,) for a single quaternion or (N, 3) for multiple quaternions,
             where each row is axis * angle.
         """
-        axis, theta = self.get_axis_angle()
+        axis, theta = self.to_axis_angle()
 
         if self.num_quaternions == 1:
             return theta * axis
         return theta[:, None] * axis
 
-    def get_rotation_matrix(self) -> NDArray:
+    def to_rotation_matrix(self) -> NDArray:
         """
         Convert quaternion to a 3x3 rotation matrix.
 
@@ -335,8 +286,7 @@ class Quaternion:
             return mats[0]
         return mats
 
-
-    def get_yaw_pitch_roll(self, degrees: bool = False) -> NDArray:
+    def to_yaw_pitch_roll(self, degrees: bool = False) -> NDArray:
         """
         Get the intrinsic Tait-Bryan angles following the z-y-x convention (yaw-pitch-roll).
 
@@ -350,10 +300,11 @@ class Quaternion:
         NDArray
             Array of shape (N, 3) containing [yaw, pitch, roll] angles.
         """
-        return self.get_tait_bryan(seq='zyx', degrees=degrees)
+        return self.to_tait_bryan(seq='zyx', degrees=degrees)
 
-    def get_euler(self, seq: str = 'zxz', degrees: bool = False,
-                  intrinsic: bool = True) -> NDArray:
+
+    def to_euler(self, seq: str = 'zxz', degrees: bool = False,
+                 intrinsic: bool = True) -> NDArray:
         """
         Calculate Euler rotation angles from the quaternion.
 
@@ -375,18 +326,18 @@ class Quaternion:
         Returns
         -------
         NDArray
-            Array of shape (N, 3) containing [alpha, beta, gamma] Euler angles.    
-            
+            Array of shape (N, 3) containing [alpha, beta, gamma] Euler angles.
+
         Raises
         ------
         ValueError
-            If ``seq`` is not one of the supported sequences.       
+            If ``seq`` is not one of the supported sequences.
         """
         valid = {"xzx", "xyx", "yxy", "yzy", "zxz", "zyz"}
         if seq.lower() not in valid:
             raise ValueError(f"Invalid Euler angle sequence '{seq}'. "
                              f"Supported sequences: {', '.join(sorted(valid))}")
-        
+
         angles = _calc_euler_angles(self.ndarray, seq)
 
         if not intrinsic:
@@ -400,8 +351,8 @@ class Quaternion:
 
         return angles
 
-    def get_tait_bryan(self, seq: str = 'xyz', degrees: bool = False,
-                       intrinsic: bool = True) -> NDArray:
+    def to_tait_bryan(self, seq: str = 'xyz', degrees: bool = False,
+                      intrinsic: bool = True) -> NDArray:
         """
         Calculate Tait-Bryan rotation angles from the quaternion.
 
@@ -425,7 +376,7 @@ class Quaternion:
         -------
         NDArray
             Array of shape (N, 3) containing [alpha, beta, gamma] Tait-Bryan angles.
-            
+
         Raises
         ------
         ValueError
@@ -444,7 +395,7 @@ class Quaternion:
 
         if self.num_quaternions == 1:
             return angles[0]
-        
+
         return angles
 
     def vector_norm(self) -> NDArray | float:
@@ -492,6 +443,55 @@ class Quaternion:
             List representation of the quaternion array.
         """
         return self.ndarray.tolist()
+
+    def _divide_by_quaternion(self, q2: 'Quaternion') -> 'Quaternion':
+        """
+        Divide this quaternion by another quaternion.
+
+        Parameters
+        ----------
+        q2 : Quaternion
+            The divisor quaternion.
+
+        Returns
+        -------
+        Quaternion
+            Result of quaternion division.
+        """
+        return Quaternion(_quat_div(self.ndarray, q2.ndarray))
+
+    def _multiply_with_quaternion(self, q2: 'Quaternion') -> 'Quaternion':
+        """
+        Multiply this quaternion with another quaternion.
+
+        Parameters
+        ----------
+        q2 : Quaternion
+            The quaternion to multiply with.
+
+        Returns
+        -------
+        Quaternion
+            Result of quaternion multiplication.
+        """
+        return Quaternion(_quat_mult(self.ndarray, q2.ndarray))
+
+    def _multiply_with_vector(self, vec):
+        """
+        Rotate a vector by this quaternion.
+
+        Parameters
+        ----------
+        vec : array-like
+            A 3D vector to rotate.
+
+        Returns
+        -------
+        NDArray
+            The rotated 3D vector.
+        """
+        q2 = Quaternion(vec)
+        return (self * q2 * self.conjugate).ndarray[:, 1:]
 
     def __getitem__(self, item: int | slice) -> NDArray:
         """

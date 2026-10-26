@@ -48,8 +48,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "ipykernel>=7.4.0",
+    "ipython>=9.17.1",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
+    "quaternionic>=1.0.18",
     "ruff>=0.17.2",
     "ty>=0.0.92",
 ]

@@ -579,6 +579,51 @@ def _quat_quat_mult(p, q):
 
     return product
 
+@njit(cache=True)
+def _quat_div(p: np.ndarray, q: np.ndarray) -> np.ndarray:
+    n = max(p.shape[0], q.shape[0])
+    out = np.empty((n, 4), dtype=np.float64)
+    p_is_single = p.shape[0] == 1
+    q_is_single = q.shape[0] == 1
+
+    for i in range(n):
+        pi = 0 if p_is_single else i
+        qi = 0 if q_is_single else i
+
+        w1, x1, y1, z1 = p[pi, 0], p[pi, 1], p[pi, 2], p[pi, 3]
+        w2, x2, y2, z2 = q[qi, 0], q[qi, 1], q[qi, 2], q[qi, 3]
+
+        n2 = w2*w2 + x2*x2 + y2*y2 + z2*z2
+        inv_n2 = 1.0 / n2 if n2 > 0.0 else 0.0
+
+        out[i, 0] = (w1*w2 + x1*x2 + y1*y2 + z1*z2) * inv_n2
+        out[i, 1] = (-w1*x2 + x1*w2 - y1*z2 + z1*y2) * inv_n2
+        out[i, 2] = (-w1*y2 + x1*z2 + y1*w2 - z1*x2) * inv_n2
+        out[i, 3] = (-w1*z2 - x1*y2 + y1*x2 + z1*w2) * inv_n2
+
+    return out
+
+@njit(cache=True)
+def _quat_mult(p: np.ndarray, q: np.ndarray) -> np.ndarray:
+    n = max(p.shape[0], q.shape[0])
+    out = np.empty((n, 4), dtype=np.float64)
+    p_is_single = p.shape[0] == 1
+    q_is_single = q.shape[0] == 1
+
+    for i in range(n):
+        pi = 0 if p_is_single else i
+        qi = 0 if q_is_single else i
+
+        w1, x1, y1, z1 = p[pi, 0], p[pi, 1], p[pi, 2], p[pi, 3]
+        w2, x2, y2, z2 = q[qi, 0], q[qi, 1], q[qi, 2], q[qi, 3]
+
+        out[i, 0] = w1*w2 - x1*x2 - y1*y2 - z1*z2
+        out[i, 1] = w1*x2 + x1*w2 + y1*z2 - z1*y2
+        out[i, 2] = w1*y2 - x1*z2 + y1*w2 + z1*x2
+        out[i, 3] = w1*z2 + x1*y2 - y1*x2 + z1*w2
+
+    return out
+
 
 @njit(cache=True)
 def _quat_element_calc(axis, angles):
