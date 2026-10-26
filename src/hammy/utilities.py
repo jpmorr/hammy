@@ -547,39 +547,6 @@ def _quat_single_multiplication(p, q):
 
 
 @njit(cache=True)
-def _quat_quat_mult(p, q):
-    """
-    Multiply two quaternion arrays (Numba-jitted).
-
-    Handles broadcasting when one quaternion has shape (1, 4).
-
-    Parameters
-    ----------
-    p, q : NDArray
-        Quaternion arrays of shape (N, 4) or (1, 4).
-
-    Returns
-    -------
-    NDArray
-        Product quaternion array of shape (max(N, M), 4).
-    """
-    n = max(p.shape[0], q.shape[0])
-    product = np.empty((n, 4), np.float64)
-
-    # dealing with broadcasting
-    if p.shape[0] == 1:
-        for ind in range(n):
-            product[ind] = _quat_single_multiplication(p[0], q[ind])
-    elif q.shape[0] == 1:
-        for ind in range(n):
-            product[ind] = _quat_single_multiplication(p[ind], q[0])
-    else:
-        for ind in range(n):
-            product[ind] = _quat_single_multiplication(p[ind], q[ind])
-
-    return product
-
-@njit(cache=True)
 def _quat_div(p: np.ndarray, q: np.ndarray) -> np.ndarray:
     n = max(p.shape[0], q.shape[0])
     out = np.empty((n, 4), dtype=np.float64)
@@ -690,9 +657,9 @@ def _compose_quaternion_rotation(angles: NDArray, seq: str = 'xyz', degrees: boo
 
     for idx in range(1, len(seq)):
         if intrinsic:
-            result = _quat_quat_mult(result, _quat_element_calc(seq[idx], angles[:, idx]))
+            result = _quat_mult(result, _quat_element_calc(seq[idx], angles[:, idx]))
         else:
-            result = _quat_quat_mult(_quat_element_calc(seq[idx], angles[:, idx]), result)
+            result = _quat_mult(_quat_element_calc(seq[idx], angles[:, idx]), result)
 
     return result
 
