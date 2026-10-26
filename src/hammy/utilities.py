@@ -25,6 +25,8 @@ X_UNIT_AXIS = (1, 0, 0)
 Y_UNIT_AXIS = (0, 1, 0)
 Z_UNIT_AXIS = (0, 0, 1)
 
+__all__ = ['normalise', 'calc_spherical_coordinates', 'make_2d']
+
 @njit(cache=True)
 def np_normalise_2d(row_array: NDArray) -> NDArray:
     """
