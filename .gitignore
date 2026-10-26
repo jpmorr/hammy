@@ -149,6 +149,7 @@ dmypy.json
 
 # Just ignore all pycharm files
 .idea/**
+.ai/**
 
 # User-specific stuff
 .idea/**/workspace.xml
