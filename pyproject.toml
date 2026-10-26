@@ -1,5 +1,60 @@
+################################################################################
+# Build Configuration
+################################################################################
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+################################################################################
+# Project Configuration
+################################################################################
 [project]
 name = "hammy"
 version = "0.1.0"
-requires-python = ">=3.13"
-dependencies = []
+description = "A lightweight Numpy and Numba accelerated package for handling quaternions and arrays of quaternions."
+readme = "README.md"
+keywords = ["Quaternion", "NumPy", "Numba", "Converter"]
+license = "BSD-3-Clause"
+
+authors = [
+  { name = "JP Morrissey", email = "morrissey.jp@gmail.com" },
+]
+maintainers  = [
+  { name = "JP Morrissey", email = "morrissey.jp@gmail.com" },
+]
+
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Manufacturing",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Visualization",
+]
+
+requires-python = ">=3.12"
+dependencies = [
+    "numba>=0.68.0",
+    "numpy>=2.5.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.2",
+    "ty>=0.0.92",
+]
+
+tests = [
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
