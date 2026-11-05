@@ -55,10 +55,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jpmorrise/hammy"
-Documentation = "https://jpmorrise.github.io/hammy"
-Repository = "https://github.com/jpmorrise/hammy"
-"Bug Tracker" = "https://github.com/jpmorrise/hammy/issues"
+Homepage = "https://github.com/jpmorr/hammy"
+Documentation = "https://jpmorr.github.io/hammy/"
+Repository = "https://github.com/jpmorr/hammy"
+"Bug Tracker" = "https://github.com/jpmorr/hammy/issues"
 
 [project.optional-dependencies]
 docs = [

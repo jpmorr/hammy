@@ -20,7 +20,7 @@ If you want to contribute to Hammy or use the latest development version:
 
 ```bash
 # Clone the repository
-git clone https://github.com/jpmorrise/hammy.git
+git clone https://github.com/jpmorr/hammy.git
 cd hammy
 
 # Install with uv (recommended)

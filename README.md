@@ -3,10 +3,10 @@
 [![PyPI version](https://badge.fury.io/py/hammy.svg)](https://pypi.org/project/hammy/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/license-BSD--3--Clause-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Documentation](https://img.shields.io/badge/docs-zensical-blue.svg)](https://jpmorrise.github.io/hammy)
+[![Documentation](https://img.shields.io/badge/docs-zensical-blue.svg)](https://jpmorr.github.io/hammy)
 
-[![Tests](https://github.com/jpmorrise/hammy/actions/workflows/tests.yml/badge.svg)](https://github.com/jpmorrise/hammy/actions)
-[![Coverage](https://codecov.io/gh/jpmorrise/hammy/branch/main/graph/badge.svg)](https://codecov.io/gh/jpmorrise/hammy)
+[![Tests](https://github.com/jpmorr/hammy/actions/workflows/tests.yml/badge.svg)](https://github.com/jpmorr/hammy/actions)
+[![Coverage](https://codecov.io/gh/jpmorr/hammy/branch/main/graph/badge.svg)](https://codecov.io/gh/jpmorr/hammy)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 **Hammy** is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.
@@ -207,11 +207,11 @@ Hammy uses Numba JIT compilation for core mathematical operations, providing nea
 
 ## Examples
 
-See the [documentation](https://github.com/jpmorrise/hammy/docs) for more detailed examples and tutorials.
+See the [documentation](https://jpmorr.github.io/hammy/) for more detailed examples and tutorials.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit issues and pull requests on [GitHub](https://github.com/jpmorrise/hammy).
+Contributions are welcome! Please feel free to submit issues and pull requests on [GitHub](https://github.com/jpmorr/hammy).
 
 ## License
 
@@ -226,6 +226,6 @@ If you use Hammy in your research, please cite:
   author = {Morrissey, JP},
   title = {Hammy: NumPy/Numba-accelerated quaternion mathematics},
   year = {2026},
-  url = {https://github.com/jpmorrise/hammy}
+  url = {https://github.com/jpmorr/hammy}
 }
 ```

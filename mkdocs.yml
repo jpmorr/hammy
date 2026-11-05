@@ -1,8 +1,8 @@
 site_name: Hammy
 site_description: NumPy/Numba-accelerated quaternion mathematics for 3D rotations
-site_url: https://jpmorrise.github.io/hammy
-repo_url: https://github.com/jpmorrise/hammy
-repo_name: jpmorrise/hammy
+site_url: https://jpmorr.github.io/hammy/
+repo_url: https://github.com/jpmorr/hammy
+repo_name: jpmorr/hammy
 copyright: Copyright &copy; 2026 JP Morrissey
 
 theme:
@@ -61,7 +61,7 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: jpmorrise
+      user: jpmorr
       repo: hammy
   - pymdownx.mark
   - pymdownx.smartsymbols
@@ -114,6 +114,6 @@ extra:
   
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/jpmorrise/hammy
+      link: https://github.com/jpmorr/hammy
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/hammy/

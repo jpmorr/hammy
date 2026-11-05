@@ -58,5 +58,5 @@ The version will automatically be `1.0.0` for tagged commits.
 
 ```bash
 # Latest development version
-pip install git+https://github.com/jpmorrise/hammy.git
+pip install git+https://github.com/jpmorr/hammy.git
 ```
