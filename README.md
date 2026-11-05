@@ -6,6 +6,7 @@
 [![Documentation](https://img.shields.io/badge/docs-zensical-blue.svg)](https://jpmorrise.github.io/hammy/)
 
 [![Tests](https://github.com/jpmorrise/hammy/actions/workflows/tests.yml/badge.svg)](https://github.com/jpmorrise/hammy/actions)
+[![Coverage](https://codecov.io/gh/jpmorrise/hammy/branch/main/graph/badge.svg)](https://codecov.io/gh/jpmorrise/hammy)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 **Hammy** is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.

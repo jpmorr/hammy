@@ -1,0 +1,32 @@
+# Codecov Configuration
+# See: https://docs.codecov.com/docs/codecov-yaml
+
+codecov:
+  require_ci_to_pass: true
+  notify:
+    after_n_builds: 1  # Wait for all Python versions to complete
+
+coverage:
+  status:
+    project:
+      default:
+        # Allow a small drop in coverage
+        threshold: 1%
+        target: auto  # Auto-adjusts based on historical coverage
+        if_ci_failed: error
+    
+    patch:
+      default:
+        # New code should be well-tested
+        target: 80%
+        threshold: 5%
+
+comment:
+  layout: "header, diff, flags, components"
+  behavior: default
+  require_changes: false  # Comment even if no changes (good for visibility)
+
+ignore:
+  - "tests/**"
+  - "docs/**"
+  - "site/**"
