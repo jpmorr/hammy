@@ -32,8 +32,13 @@ jobs:
       - name: Install dependencies
         run: uv sync --group tests
 
-      - name: Run tests with coverage
-        run: uv run pytest -v --cov=hammy --cov-report=term-missing --cov-report=xml
+      - name: Run tests with coverage and reports
+        run: |
+          uv run pytest -v \
+            --cov=hammy \
+            --cov-report=term-missing \
+            --cov-report=xml \
+            --junitxml=test-results.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -42,3 +47,13 @@ jobs:
           files: ./coverage.xml
           fail_ci_if_error: false
           verbose: true
+
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v4
+        if: always() && matrix.python-version == '3.12'
+        with:
+          files: ./test-results.xml
+          flags: unittests
+          verbose: true
+          override_pr: ${{ github.event.pull_request.number }}
+          override_commit: ${{ github.sha }}
