@@ -11,7 +11,7 @@ build-backend = "hatchling.build"
 ################################################################################
 [project]
 name = "hammy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A lightweight Numpy and Numba accelerated package for handling quaternions and arrays of quaternions."
 readme = "README.md"
 keywords = ["Quaternion", "NumPy", "Numba", "Converter"]

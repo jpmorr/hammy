@@ -30,7 +30,6 @@ from .utilities import (
     _calc_rotation_mat,
     _calc_tait_bryan_angles,
     _compose_quaternion_rotation,
-    _quat_quat_mult,
     _quat_to_axis_angle,
     _spherical_coords_to_quat,
     normalise, _quat_mult, _quat_div,
@@ -285,6 +284,19 @@ class Quaternion:
         if self.num_quaternions == 1:
             return mats[0]
         return mats
+
+    def get_rotation_matrix_flat(self) -> NDArray:
+        """
+        Convert quaternion to a flat 9-element rotation matrix array.
+
+        Returns
+        -------
+        NDArray
+            A flat array of shape (N, 9) containing rotation matrix elements.
+            For a single quaternion, returns shape (9,).
+        """
+        mats = _calc_rotation_mat(self.ndarray)
+        return mats.reshape(mats.shape[0], 9)
 
     def to_yaw_pitch_roll(self, degrees: bool = False) -> NDArray:
         """
