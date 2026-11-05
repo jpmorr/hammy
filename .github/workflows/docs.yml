@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'src/hammy/**'
       - 'mkdocs.yml'
       - 'README.md'
   workflow_dispatch:
@@ -35,7 +36,7 @@ jobs:
           uv sync --group docs
 
       - name: Build documentation
-        run: uv run mkdocs build
+        run: uv run zensical build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

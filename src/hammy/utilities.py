@@ -256,16 +256,16 @@ def _calc_euler_angles(qarr: NDArray, seq: str) -> NDArray:
 
     Parameters
     ----------
-    q0, q1, q2, q3 : NDArray
-        Arrays of quaternion components.
+    qarr : NDArray
+        Array of quaternions of shape (N, 4) in scalar-first format [w, x, y, z].
     seq : str
         Euler angle sequence (one of 'xzx', 'xyx', 'yxy', 'yzy', 'zxz', 'zyz').
 
     Returns
     -------
-    tuple of NDArray
-        (alpha, beta, gamma) Euler angles for each quaternion.
-        Returns NaN for each angle if an invalid sequence is provided.
+    NDArray
+        Euler angles of shape (N, 3) containing [alpha, beta, gamma].
+        Returns NaN for invalid sequences.
     """
     n_quats = qarr.shape[0]
     m = np.full((n_quats, 3), np.nan, dtype=qarr.dtype)
