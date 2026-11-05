@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,29 +34,18 @@ jobs:
       - name: Install dependencies
         run: uv sync --group tests
 
-      - name: Run tests with coverage and reports
+      - name: Generate coverage and test results
         run: |
-          uv run pytest -v \
-            --cov=hammy \
-            --cov-report=term-missing \
-            --cov-report=xml \
-            --junitxml=test-results-${{ matrix.python-version }}.junit.xml \
-            -o junit_family=legacy \
-            --rootdir=.
+          uv run pytest \
+            --cov=src/hammy \
+            --cov-report=xml:coverage-${{ matrix.python-version }}.xml \
+            --junitxml=test-results-${{ matrix.python-version }}.xml \
+            -o junit_family=legacy
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        if: matrix.python-version == '3.12'
-        with:
-          files: ./coverage.xml
-          fail_ci_if_error: false
-          verbose: true
-
-      - name: Upload test results to Codecov
+      - name: Upload coverage and tests to Codecov
         uses: codecov/codecov-action@v4
         if: always()
         with:
-          files: ./test-results-${{ matrix.python-version }}.junit.xml
-          flags: unittests
+          files: ./coverage-${{ matrix.python-version }}.xml,./test-results-${{ matrix.python-version }}.xml
+          flags: python-${{ matrix.python-version }}
           verbose: true
-          disable_search: true
