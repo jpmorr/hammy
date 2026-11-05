@@ -15,7 +15,7 @@ from pathlib import Path
 def get_version() -> str:
     """Get version from hatch-vcs."""
     try:
-        version = importlib.metadata.version("hammy")
+        version = importlib.metadata.version("quatham")
         # Clean up dev versions
         if "+" in version or ".d" in version:
             base = version.split("+")[0] if "+" in version else version.split(".d")[0]

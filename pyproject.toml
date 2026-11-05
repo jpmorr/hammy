@@ -10,7 +10,7 @@ path = "src/hammy/__version__.py"
 pattern = '__version__ = "(?P<version>[^"]+)"'
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/hammy"]
+packages = ["src/quatham"]
 
 
 ################################################################################

@@ -19,8 +19,8 @@ import numpy as np
 import pytest
 
 # Local Sources
-from hammy.Quaternion import Quaternion
-from hammy.utilities import _compose_quaternion_rotation, normalise
+from quatham.Quaternion import Quaternion
+from quatham.utilities import _compose_quaternion_rotation, normalise
 
 class TestQuaternionAlgebra:
     """Validates core algebraic properties, component access, and operator overloading."""

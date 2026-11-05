@@ -30,11 +30,11 @@
 pip install quatham
 ```
 
-**Note:** The package is named `quatham` on PyPI, but you import it as `hammy` in Python:
+**Note:** The package name and import are both `quatham`:
 
 ```python
-import hammy  # ← Import name stays the same
-from hammy import Quaternion
+import quatham
+from quatham import Quaternion
 ```
 
 ### Requirements
@@ -48,7 +48,7 @@ from hammy import Quaternion
 ### Basic Usage
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 # Create a quaternion from components

@@ -7,7 +7,7 @@ This tutorial covers all the different ways to create quaternions in Quatham.
 The most direct way to create a quaternion is from its four components:
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 # Identity quaternion (no rotation)
@@ -115,7 +115,7 @@ R = np.array([
 
 # Extract axis-angle (using scipy or custom code)
 # Then create quaternion
-from hammy import Quaternion
+from quatham import Quaternion
 axis = np.array([0, 0, 1])
 angle = np.pi / 2
 q = Quaternion.from_axisangle(axis, angle)

@@ -1,6 +1,6 @@
 # Quaternion Class Reference
 
-::: hammy.Quaternion.Quaternion
+::: quatham.Quaternion.Quaternion
     handler: python
     options:
       docstring_style: numpy

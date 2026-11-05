@@ -1,6 +1,6 @@
 # Welcome to Quatham
 
-**Quatham** (import as `hammy`) is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.
+**Quatham** is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.
 
 ## Quick Navigation
 
@@ -33,7 +33,7 @@ Complete API documentation.
 ## Example
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 # Create a quaternion from axis-angle
@@ -50,7 +50,7 @@ R = q.to_rotation_matrix()
 ## Installation
 
 ```bash
-pip install hammy
+pip install quatham
 ```
 
 See the [Installation Guide](getting-started/installation.md) for detailed instructions.

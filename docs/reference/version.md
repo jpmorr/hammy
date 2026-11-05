@@ -7,20 +7,20 @@ The current version of Quatham is dynamically determined from Git tags using `ha
 ### In Python
 
 ```python
-import hammy
-print(hammy.__version__)
+import quatham
+print(quatham.__version__)
 ```
 
 ### From Command Line
 
 ```bash
-python -c "import hammy; print(hammy.__version__)"
+python -c "import quatham; print(quatham.__version__)"
 ```
 
 ### From Package Metadata
 
 ```bash
-uv run python -m pip show hammy
+uv run python -m pip show quatham
 ```
 
 ## Version Scheme
@@ -53,7 +53,7 @@ The version will automatically be `1.0.0` for tagged commits.
 
 ## For Users
 
-- **PyPI releases**: Use `pip install hammy` for stable releases
+- **PyPI releases**: Use `pip install quatham` for stable releases
 - **Development versions**: Install from GitHub for latest features
 
 ```bash

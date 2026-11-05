@@ -8,7 +8,7 @@ Quatham is designed for high-performance batch processing using Numba JIT compil
 
 ```python
 import numpy as np
-from hammy import Quaternion
+from quatham import Quaternion
 
 # Create 1000 random rotations
 angles = np.random.uniform(-np.pi, np.pi, size=(1000, 3))

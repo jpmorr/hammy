@@ -18,8 +18,8 @@ import numpy as np
 import pytest
 
 # Local Sources
-from hammy.Quaternion import Quaternion
-from hammy.utilities import _compose_quaternion_rotation, normalise
+from quatham.Quaternion import Quaternion
+from quatham.utilities import _compose_quaternion_rotation, normalise
 
 rots2 = (0.4636476090008061, 0.3217505543966422, 0.16514867741462683)
 angles = np.asarray(rots2, dtype=float)

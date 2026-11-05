@@ -628,72 +628,6 @@ wheels = [
 ]
 
 [[package]]
-name = "hammy"
-version = "0.2.0"
-source = { editable = "." }
-dependencies = [
-    { name = "numba" },
-    { name = "numpy" },
-]
-
-[package.optional-dependencies]
-docs = [
-    { name = "mkdocs" },
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "hatch" },
-    { name = "ipykernel" },
-    { name = "ipython" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "quaternionic" },
-    { name = "ruff" },
-    { name = "ty" },
-]
-docs = [
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "zensical" },
-]
-tests = [
-    { name = "pytest" },
-    { name = "pytest-cov" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.0" },
-    { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.5.0" },
-    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.25.0" },
-    { name = "numba", specifier = ">=0.60.0" },
-    { name = "numpy", specifier = ">=2.0.0" },
-]
-provides-extras = ["docs"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "hatch", specifier = ">=1.18.2" },
-    { name = "ipykernel", specifier = ">=7.4.0" },
-    { name = "ipython", specifier = ">=9.17.1" },
-    { name = "pytest", specifier = ">=9.1.1" },
-    { name = "pytest-cov", specifier = ">=7.1.0" },
-    { name = "quaternionic", specifier = ">=1.0.18" },
-    { name = "ruff", specifier = ">=0.17.2" },
-    { name = "ty", specifier = ">=0.0.92" },
-]
-docs = [
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.25.0" },
-    { name = "zensical", specifier = ">=0.0.70" },
-]
-tests = [
-    { name = "pytest", specifier = ">=8.3.5" },
-    { name = "pytest-cov", specifier = ">=6.1.1" },
-]
-
-[[package]]
 name = "hatch"
 version = "1.18.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1767,6 +1701,72 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8c/48/2e785b8836db7bbdf61821020193d79b86f443ed71adf7e67062229161be/quaternionic-1.0.18.tar.gz", hash = "sha256:9c5ee261650a52d09b9319e66b59dfa69d0b2025ab0db3eba6dff6ec63f5443b", size = 48991, upload-time = "2026-09-07T14:27:41.994Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/99/87/0080853f8f970af66b36fa40713649b1780b31deab13cd195ac786971893/quaternionic-1.0.18-py3-none-any.whl", hash = "sha256:d7794d4889eeeb4800081af0182d6ffe599eaf9df0c32b5acfaf1783aaa80ce6", size = 37521, upload-time = "2026-09-07T14:27:40.984Z" },
+]
+
+[[package]]
+name = "quatham"
+version = "0.2.0"
+source = { editable = "." }
+dependencies = [
+    { name = "numba" },
+    { name = "numpy" },
+]
+
+[package.optional-dependencies]
+docs = [
+    { name = "mkdocs" },
+    { name = "mkdocs-material" },
+    { name = "mkdocstrings", extra = ["python"] },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "hatch" },
+    { name = "ipykernel" },
+    { name = "ipython" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "quaternionic" },
+    { name = "ruff" },
+    { name = "ty" },
+]
+docs = [
+    { name = "mkdocstrings", extra = ["python"] },
+    { name = "zensical" },
+]
+tests = [
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "mkdocs", marker = "extra == 'docs'", specifier = ">=1.6.0" },
+    { name = "mkdocs-material", marker = "extra == 'docs'", specifier = ">=9.5.0" },
+    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.25.0" },
+    { name = "numba", specifier = ">=0.60.0" },
+    { name = "numpy", specifier = ">=2.0.0" },
+]
+provides-extras = ["docs"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "hatch", specifier = ">=1.18.2" },
+    { name = "ipykernel", specifier = ">=7.4.0" },
+    { name = "ipython", specifier = ">=9.17.1" },
+    { name = "pytest", specifier = ">=9.1.1" },
+    { name = "pytest-cov", specifier = ">=7.1.0" },
+    { name = "quaternionic", specifier = ">=1.0.18" },
+    { name = "ruff", specifier = ">=0.17.2" },
+    { name = "ty", specifier = ">=0.0.92" },
+]
+docs = [
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.25.0" },
+    { name = "zensical", specifier = ">=0.0.70" },
+]
+tests = [
+    { name = "pytest", specifier = ">=8.3.5" },
+    { name = "pytest-cov", specifier = ">=6.1.1" },
 ]
 
 [[package]]

@@ -2,7 +2,7 @@
 
 ## Project Overview
 - **Package**: `quatham` (import as `hammy`) — NumPy/Numba-accelerated quaternion mathematics for 3D rotations
-- **Structure**: Single-package layout under `src/hammy/`
+- **Structure**: Single-package layout under `src/quatham/`
 - **Python**: 3.12+
 - **Package manager**: `uv` (lockfile: `uv.lock`)
 
@@ -34,9 +34,9 @@ uv run ruff format src/ tests/
 ## Architecture Notes
 
 ### Source Files
-- `src/hammy/Quaternion.py` — Main `Quaternion` class with algebraic operations and conversions
-- `src/hammy/utilities.py` — Low-level Numba-jitted math functions (`@njit(cache=True)`)
-- `src/hammy/__init__.py` — Exports `Quaternion` class
+- `src/quatham/Quaternion.py` — Main `Quaternion` class with algebraic operations and conversions
+- `src/quatham/utilities.py` — Low-level Numba-jitted math functions (`@njit(cache=True)`)
+- `src/quatham/__init__.py` — Exports `Quaternion` class
 
 ### Test Files
 - `tests/test_algebra.py` — Quaternion algebra, normalization, arithmetic operations

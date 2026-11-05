@@ -7,7 +7,7 @@ This tutorial covers converting between quaternions and other rotation represent
 ### Creating from Axis-Angle
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 # Rotation around Z-axis by 90 degrees

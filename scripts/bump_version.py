@@ -44,7 +44,7 @@ def main():
         sys.exit(1)
     
     bump_type = sys.argv[1]
-    version_file = Path("src/hammy/__version__.py")
+    version_file = Path("src/quatham/__version__.py")
     
     if not version_file.exists():
         print(f"Error: Version file not found: {version_file}")

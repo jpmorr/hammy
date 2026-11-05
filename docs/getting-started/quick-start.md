@@ -5,7 +5,7 @@ This guide shows you how to get started with Quatham in just a few minutes.
 ## Creating Your First Quaternion
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 # Method 1: From components [w, x, y, z]

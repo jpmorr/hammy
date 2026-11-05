@@ -5,7 +5,7 @@ This tutorial covers arithmetic operations with quaternions in Quatham.
 ## Addition and Subtraction
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 q1 = Quaternion([1.0, 2.0, 3.0, 4.0])

@@ -11,7 +11,7 @@ import importlib.metadata
 def get_package_version() -> str:
     """Get the current package version from hatch-vcs."""
     try:
-        version = importlib.metadata.version("hammy")
+        version = importlib.metadata.version("quatham")
         # Clean up development versions for display
         # e.g., "0.0.post19+g4e7ffc23a.d20261105" → "0.0.0-dev"
         if "+" in version or ".d" in version:

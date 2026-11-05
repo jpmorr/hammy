@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-"""Tests for utility functions in hammy.utilities module."""
+"""Tests for utility functions in quatham.utilities module."""
 
 import numpy as np
 import pytest
 
-from hammy.utilities import calc_cross, calc_spherical_coordinates, make_2d
+from quatham.utilities import calc_cross, calc_spherical_coordinates, make_2d
 
 
 class TestCalcCross:

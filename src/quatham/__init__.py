@@ -26,7 +26,7 @@ Examples
 --------
 Create a quaternion from Euler angles::
 
-    from hammy import Quaternion
+    from quatham import Quaternion
     import numpy as np
 
     q = Quaternion.from_euler([np.pi/4, 0, 0], seq='xyz', degrees=False)

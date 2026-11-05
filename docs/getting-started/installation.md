@@ -11,7 +11,7 @@
 Install Quatham from PyPI using pip:
 
 ```bash
-pip install hammy
+pip install quatham
 ```
 
 ## Development Installation
@@ -21,7 +21,7 @@ If you want to contribute to Quatham or use the latest development version:
 ```bash
 # Clone the repository
 git clone https://github.com/jpmorr/quatham.git
-cd hammy
+cd quatham
 
 # Install with uv (recommended)
 uv sync
@@ -35,7 +35,7 @@ pip install -e ".[dev]"
 Verify your installation by running a simple test:
 
 ```python
-from hammy import Quaternion
+from quatham import Quaternion
 import numpy as np
 
 q = Quaternion.from_axisangle([0, 0, 1], np.pi/2)
