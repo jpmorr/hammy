@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Project Overview
-- **Package**: `hammy` — NumPy/Numba-accelerated quaternion mathematics for 3D rotations
+- **Package**: `quatham` (import as `hammy`) — NumPy/Numba-accelerated quaternion mathematics for 3D rotations
 - **Structure**: Single-package layout under `src/hammy/`
 - **Python**: 3.12+
 - **Package manager**: `uv` (lockfile: `uv.lock`)

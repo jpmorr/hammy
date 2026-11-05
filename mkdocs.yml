@@ -1,8 +1,8 @@
-site_name: Hammy
+site_name: Quatham
 site_description: NumPy/Numba-accelerated quaternion mathematics for 3D rotations
-site_url: https://jpmorr.github.io/hammy/
-repo_url: https://github.com/jpmorr/hammy
-repo_name: jpmorr/hammy
+site_url: https://jpmorr.github.io/quatham/
+repo_url: https://github.com/jpmorr/quatham
+repo_name: jpmorr/quatham
 copyright: Copyright &copy; 2026 JP Morrissey
 
 theme:

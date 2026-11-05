@@ -17,11 +17,11 @@ packages = ["src/hammy"]
 # Project Configuration
 ################################################################################
 [project]
-name = "hammy"
+name = "quatham"
 version = "0.2.0"
 description = "A lightweight Numpy and Numba accelerated package for handling quaternions and arrays of quaternions."
 readme = "README.md"
-keywords = ["Quaternion", "NumPy", "Numba", "Converter"]
+keywords = ["Quaternion", "NumPy", "Numba", "Converter", "3D", "Rotation"]
 license = "BSD-3-Clause"
 
 authors = [
@@ -55,10 +55,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/jpmorr/hammy"
-Documentation = "https://jpmorr.github.io/hammy/"
-Repository = "https://github.com/jpmorr/hammy"
-"Bug Tracker" = "https://github.com/jpmorr/hammy/issues"
+Homepage = "https://github.com/jpmorr/quatham"
+Documentation = "https://jpmorr.github.io/quatham/"
+Repository = "https://github.com/jpmorr/quatham"
+"Bug Tracker" = "https://github.com/jpmorr/quatham/issues"
 
 [project.optional-dependencies]
 docs = [
