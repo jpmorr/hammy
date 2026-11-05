@@ -1,0 +1,50 @@
+name: Auto-Tag Releases
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/hammy/__version__.py'
+
+permissions:
+  contents: write
+
+jobs:
+  tag-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Get all history for version comparison
+
+      - name: Get version from file
+        id: version
+        run: |
+          VERSION=$(grep -oP '__version__ = "\K[^"]+' src/hammy/__version__.py)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: Check if tag exists
+        id: tag_check
+        run: |
+          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create release tag
+        if: steps.tag_check.outputs.exists == 'false'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release version ${{ steps.version.outputs.version }}"
+          git push origin "v${{ steps.version.outputs.version }}"
+          echo "Created and pushed tag v${{ steps.version.outputs.version }}"
+
+      - name: Tag already exists
+        if: steps.tag_check.outputs.exists == 'true'
+        run: |
+          echo "Tag v${{ steps.version.outputs.version }} already exists, skipping tag creation"

@@ -45,5 +45,6 @@ Notes
 """
 
 from .Quaternion import Quaternion
+from .__version__ import __version__
 
 __all__ = ["Quaternion"]

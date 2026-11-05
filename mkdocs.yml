@@ -91,6 +91,7 @@ nav:
   - API Reference:
     - Quaternion Class: reference/quaternion.md
     - Utilities: reference/utilities.md
+    - Version: reference/version.md
 
 plugins:
   - search
@@ -108,6 +109,9 @@ plugins:
             annotations_path: brief
 
 extra:
+  # Version is injected dynamically by docs_hooks.py
+  version: ""
+  
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/jpmorrise/hammy
