@@ -6,7 +6,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "src/hammy/__version__.py"
+path = "src/quatham/__version__.py"
 pattern = '__version__ = "(?P<version>[^"]+)"'
 
 [tool.hatch.build.targets.wheel]
@@ -18,7 +18,7 @@ packages = ["src/quatham"]
 ################################################################################
 [project]
 name = "quatham"
-version = "0.2.0"
+dynamic = ["version"]
 description = "A lightweight Numpy and Numba accelerated package for handling quaternions and arrays of quaternions."
 readme = "README.md"
 keywords = ["Quaternion", "NumPy", "Numba", "Converter", "3D", "Rotation"]

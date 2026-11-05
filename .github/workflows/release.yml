@@ -1,50 +1,44 @@
-name: Auto-Tag Releases
+name: Release to PyPI
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'src/quatham/__version__.py'
+    tags:
+      - '*'  # Trigger on any tag
 
 permissions:
-  contents: write
+  contents: read
+  id-token: write  # Required for trusted publishing to PyPI
 
 jobs:
-  tag-release:
+  release:
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/quatham/
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Get all history for version comparison
+          fetch-depth: 0  # Get all history for hatch-vcs
 
-      - name: Get version from file
-        id: version
-        run: |
-          VERSION=$(grep -oP '__version__ = "\K[^"]+' src/quatham/__version__.py)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Detected version: $VERSION"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
 
-      - name: Check if tag exists
-        id: tag_check
-        run: |
-          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Create release tag
-        if: steps.tag_check.outputs.exists == 'false'
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git tag -a "v${{ steps.version.outputs.version }}" -m "Release version ${{ steps.version.outputs.version }}"
-          git push origin "v${{ steps.version.outputs.version }}"
-          echo "Created and pushed tag v${{ steps.version.outputs.version }}"
+      - name: Install dependencies
+        run: uv sync --group dev
 
-      - name: Tag already exists
-        if: steps.tag_check.outputs.exists == 'true'
-        run: |
-          echo "Tag v${{ steps.version.outputs.version }} already exists, skipping tag creation"
+      - name: Build package
+        run: uv build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          verbose: true
