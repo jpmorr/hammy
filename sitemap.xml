@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
-        <loc>https://jpmorrise.github.io/hammy/</loc>
+        <loc>https://jpmorr.github.io/hammy/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/getting-started/concepts/</loc>
+        <loc>https://jpmorr.github.io/hammy/getting-started/concepts/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/getting-started/installation/</loc>
+        <loc>https://jpmorr.github.io/hammy/getting-started/installation/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/getting-started/quick-start/</loc>
+        <loc>https://jpmorr.github.io/hammy/getting-started/quick-start/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/reference/quaternion/</loc>
+        <loc>https://jpmorr.github.io/hammy/reference/quaternion/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/reference/utilities/</loc>
+        <loc>https://jpmorr.github.io/hammy/reference/utilities/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/reference/version/</loc>
+        <loc>https://jpmorr.github.io/hammy/reference/version/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/tutorials/arithmetic/</loc>
+        <loc>https://jpmorr.github.io/hammy/tutorials/arithmetic/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/tutorials/batch-operations/</loc>
+        <loc>https://jpmorr.github.io/hammy/tutorials/batch-operations/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/tutorials/conversions/</loc>
+        <loc>https://jpmorr.github.io/hammy/tutorials/conversions/</loc>
       </url>
       <url>
-        <loc>https://jpmorrise.github.io/hammy/tutorials/creating-quaternions/</loc>
+        <loc>https://jpmorr.github.io/hammy/tutorials/creating-quaternions/</loc>
       </url>
 </urlset>
