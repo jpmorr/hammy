@@ -24,6 +24,11 @@ maintainers  = [
   { name = "JP Morrissey", email = "morrissey.jp@gmail.com" },
 ]
 
+requires-python = ">=3.12"
+dependencies = [
+    "numba>=0.60.0",
+    "numpy>=2.0.0",
+]
 
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -38,12 +43,21 @@ classifiers = [
   "Intended Audience :: Manufacturing",
   "Topic :: Scientific/Engineering",
   "Topic :: Scientific/Engineering :: Visualization",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Typing :: Typed",
 ]
 
-requires-python = ">=3.12"
-dependencies = [
-    "numba>=0.68.0",
-    "numpy>=2.5.4",
+[project.urls]
+Homepage = "https://github.com/jpmorrise/hammy"
+Documentation = "https://jpmorrise.github.io/hammy"
+Repository = "https://github.com/jpmorrise/hammy"
+"Bug Tracker" = "https://github.com/jpmorrise/hammy/issues"
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs>=1.6.0",
+  "mkdocs-material>=9.5.0",
+  "mkdocstrings[python]>=0.25.0",
 ]
 
 [dependency-groups]
@@ -60,4 +74,10 @@ dev = [
 tests = [
     "pytest>=8.3.5",
     "pytest-cov>=6.1.1",
+]
+
+docs = [
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.5.0",
+    "mkdocstrings[python]>=0.25.0",
 ]

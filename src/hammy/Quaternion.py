@@ -12,8 +12,7 @@ from __future__ import annotations
 from typing import Self
 
 
-__copyright__ = 'Copyright 2023'
-__version__ = '1.0.1'
+__copyright__ = 'Copyright 2026'
 __status__ = 'Development'
 
 # Standard Library
@@ -137,7 +136,7 @@ class Quaternion:
         return self._vector
 
     @property
-    def conjugate(self) -> 'Quaternion':
+    def conjugate(self) -> Self:
         """
         Conjugate of quaternion.
 
@@ -167,7 +166,7 @@ class Quaternion:
 
     @classmethod
     def from_axisangle(cls, v: NDArray | list | tuple, theta: float | NDArray | list | tuple,
-                       degrees: bool = False) -> 'Quaternion':
+                       degrees: bool = False) -> Self:
         """
         Create a quaternion from an axis-angle representation.
 
@@ -189,7 +188,7 @@ class Quaternion:
 
     @classmethod
     def from_euler(cls, angles: NDArray, seq: str = 'xyz', degrees: bool = False,
-                   intrinsic: bool = False) -> 'Quaternion':
+                   intrinsic: bool = False) -> Self:
         """
         Create a quaternion from Euler angles.
 
@@ -212,7 +211,7 @@ class Quaternion:
         return cls(_compose_quaternion_rotation(angles, seq=seq, degrees=degrees, intrinsic=intrinsic))
 
     @classmethod
-    def from_spherical(cls, theta: float, phi: float, degrees: bool = False) -> 'Quaternion':
+    def from_spherical(cls, theta: float, phi: float, degrees: bool = False) -> Self:
         """
         Create a quaternion from spherical coordinates.
 
@@ -423,7 +422,7 @@ class Quaternion:
             return float(np.linalg.norm(self._vector[0]))
         return np.linalg.norm(self._vector, axis=1)
 
-    def normalise(self) -> 'Quaternion':
+    def normalise(self) -> Self:
         """
         Return a normalised (unit) quaternion.
 
@@ -434,7 +433,7 @@ class Quaternion:
         """
         return Quaternion(normalise(self.ndarray))
 
-    def normalize(self) -> 'Quaternion':
+    def normalize(self) -> Self:
         """
         Return a normalised (unit) quaternion (alias for normalise).
 
@@ -456,7 +455,7 @@ class Quaternion:
         """
         return self.ndarray.tolist()
 
-    def _divide_by_quaternion(self, q2: 'Quaternion') -> 'Quaternion':
+    def _divide_by_quaternion(self, q2: Self) -> Self:
         """
         Divide this quaternion by another quaternion.
 
@@ -472,7 +471,7 @@ class Quaternion:
         """
         return Quaternion(_quat_div(self.ndarray, q2.ndarray))
 
-    def _multiply_with_quaternion(self, q2: 'Quaternion') -> 'Quaternion':
+    def _multiply_with_quaternion(self, q2: Self) -> Self:
         """
         Multiply this quaternion with another quaternion.
 
@@ -488,19 +487,19 @@ class Quaternion:
         """
         return Quaternion(_quat_mult(self.ndarray, q2.ndarray))
 
-    def _multiply_with_vector(self, vec):
+    def _multiply_with_vector(self, vec: NDArray) -> NDArray:
         """
         Rotate a vector by this quaternion.
 
         Parameters
         ----------
-        vec : array-like
-            A 3D vector to rotate.
+        vec : NDArray
+            A 3D vector to rotate, shape (3,) or (N, 3).
 
         Returns
         -------
         NDArray
-            The rotated 3D vector.
+            The rotated 3D vector(s), shape (3,) or (N, 3).
         """
         q2 = Quaternion(vec)
         return (self * q2 * self.conjugate).ndarray[:, 1:]
@@ -559,7 +558,7 @@ class Quaternion:
         """
         return np.array_repr(self.ndarray, precision=6, suppress_small=True)
 
-    def __add__(self, other: Self | NDArray | list | tuple) -> 'Quaternion':
+    def __add__(self, other: Self | NDArray | list | tuple) -> Self:
         """
         Add another quaternion or array to this quaternion.
 
@@ -579,7 +578,7 @@ class Quaternion:
             return Quaternion(self.ndarray + np.asarray(other))
         raise TypeError(f"Cannot add Quaternion and {type(other)}")
 
-    def __radd__(self, other: Self | NDArray | list | tuple) -> 'Quaternion':
+    def __radd__(self, other: Self | NDArray | list | tuple) -> Self:
         """
         Right addition for quaternion.
 
@@ -595,7 +594,7 @@ class Quaternion:
         """
         return self.__add__(other)
 
-    def __sub__(self, other: Self | NDArray | list | tuple) -> 'Quaternion':
+    def __sub__(self, other: Self | NDArray | list | tuple) -> Self:
         """
         Subtract another quaternion or array from this quaternion.
 
@@ -615,7 +614,7 @@ class Quaternion:
             return Quaternion(self.ndarray - np.asarray(other))
         raise TypeError(f"Cannot subtract {type(other)} from Quaternion")
 
-    def __rsub__(self, other: Self | NDArray | list | tuple) -> 'Quaternion':
+    def __rsub__(self, other: Self | NDArray | list | tuple) -> Self:
         """
         Right subtraction for quaternion.
 
@@ -635,7 +634,7 @@ class Quaternion:
             return Quaternion(np.asarray(other) - self.ndarray)
         raise TypeError(f"Cannot subtract Quaternion from {type(other)}")
 
-    def __neg__(self) -> 'Quaternion':
+    def __neg__(self) -> Self:
         """
         Negate all components of the quaternion(s).
 
@@ -646,7 +645,7 @@ class Quaternion:
         """
         return Quaternion(-self.ndarray)
 
-    def __mul__(self, other: Self | NDArray | list | tuple | float | int) -> 'Quaternion' | NDArray:
+    def __mul__(self, other: Self | NDArray | list | tuple | float | int) -> Self | NDArray:
         """
         Multiply quaternion by another quaternion, scalar, or rotate a vector.
 
@@ -693,7 +692,7 @@ class Quaternion:
         else:
             raise TypeError(f"Multiplication with unknown type {type(other)}")
 
-    def __rmul__(self, other: float | int | np.number | NDArray) -> 'Quaternion':
+    def __rmul__(self, other: float | int | np.number | NDArray) -> Self:
         """
         Multiply a scalar by this quaternion (scalar * q).
 
@@ -714,7 +713,7 @@ class Quaternion:
             return Quaternion(self.ndarray * arr)
         raise TypeError(f"Cannot multiply {type(other)} with Quaternion")
 
-    def __truediv__(self, other: Self | float | int | np.number | NDArray) -> 'Quaternion':
+    def __truediv__(self, other: Self | float | int | np.number | NDArray) -> Self:
         """
         Divide this quaternion by another quaternion or scalar.
 
@@ -751,7 +750,7 @@ class Quaternion:
         else:
             raise TypeError(f"Division with unknown type {type(other)}")
 
-    def __rtruediv__(self, other: float | int | np.number) -> 'Quaternion':
+    def __rtruediv__(self, other: float | int | np.number) -> Self:
         """
         Divide a scalar by this quaternion (scalar / q = scalar * q^-1).
 

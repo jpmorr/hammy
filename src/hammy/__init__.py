@@ -26,15 +26,15 @@ Examples
 --------
 Create a quaternion from Euler angles::
 
-    from granulysed.quaternion import Quaternion
+    from hammy import Quaternion
     import numpy as np
 
     q = Quaternion.from_euler([np.pi/4, 0, 0], seq='xyz', degrees=False)
-    print(q.get_rotation_matrix())
+    print(q.to_rotation_matrix())
 
 Convert to Tait-Bryan (yaw-pitch-roll)::
 
-    ypr = q.get_tait_bryan(seq='zyx', degrees=True)
+    ypr = q.to_yaw_pitch_roll(degrees=True)
     print(f"Yaw: {ypr[0]:.1f}°, Pitch: {ypr[1]:.1f}°, Roll: {ypr[2]:.1f}°")
 
 Notes
