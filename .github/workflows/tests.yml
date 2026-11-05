@@ -39,7 +39,8 @@ jobs:
             --cov-report=term-missing \
             --cov-report=xml \
             --junitxml=test-results-${{ matrix.python-version }}.junit.xml \
-            -o junit_family=legacy
+            -o junit_family=legacy \
+            --rootdir=.
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -56,5 +57,4 @@ jobs:
           files: ./test-results-${{ matrix.python-version }}.junit.xml
           flags: unittests
           verbose: true
-          disable_file_fixes: true
           disable_search: true
