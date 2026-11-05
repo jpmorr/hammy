@@ -1,6 +1,6 @@
 # Basic Concepts
 
-This page introduces the fundamental concepts you need to understand when working with Hammy.
+This page introduces the fundamental concepts you need to understand when working with Quatham.
 
 ## What is a Quaternion?
 
@@ -13,7 +13,7 @@ A quaternion is a mathematical object that extends complex numbers to four dimen
 
 ## Quaternion Representation
 
-Hammy uses the **scalar-first** convention:
+Quatham uses the **scalar-first** convention:
 
 ```
 q = [w, x, y, z]
@@ -37,7 +37,7 @@ For rotation operations, we use **unit quaternions** where:
 |q| = √(w² + x² + y² + z²) = 1
 ```
 
-Hammy provides the `normalise()` method to convert any quaternion to a unit quaternion:
+Quatham provides the `normalise()` method to convert any quaternion to a unit quaternion:
 
 ```python
 q = Quaternion([2.0, 2.0, 2.0, 2.0])
@@ -63,7 +63,7 @@ assert np.allclose(q1.to_rotation_matrix(), q2.to_rotation_matrix())
 - **Intrinsic rotations**: Each rotation is about the local (moving) axes
 - **Extrinsic rotations**: Each rotation is about the fixed (global) axes
 
-Hammy uses **intrinsic rotations** by default:
+Quatham uses **intrinsic rotations** by default:
 
 ```python
 # Intrinsic (default)
@@ -75,7 +75,7 @@ q_extrinsic = Quaternion.from_euler([a, b, c], seq='xyz', intrinsic=False)
 
 ### Rotation Sequences
 
-Hammy supports two types of rotation sequences:
+Quatham supports two types of rotation sequences:
 
 **Proper Euler Angles** (2 distinct axes):
 - `xzx`, `xyx`, `yxy`, `yzy`, `zxz`, `zyz`
@@ -87,7 +87,7 @@ The Tait-Bryan `zyx` sequence corresponds to **yaw-pitch-roll** in aerospace app
 
 ## Batch Operations
 
-All Hammy operations support both single quaternions and arrays:
+All Quatham operations support both single quaternions and arrays:
 
 ```python
 # Single quaternion
@@ -108,7 +108,7 @@ rotated_array = q_array * v        # Shape: (3, 3)
 
 ## Performance Considerations
 
-Hammy uses Numba JIT compilation for optimal performance:
+Quatham uses Numba JIT compilation for optimal performance:
 
 1. **First call overhead**: The first operation includes JIT compilation time
 2. **Subsequent calls**: Much faster due to caching
@@ -127,6 +127,6 @@ results = q_array * v
 
 ## Next Steps
 
-- [Installation Guide](installation.md) — Set up Hammy
+- [Installation Guide](installation.md) — Set up Quatham
 - [Quick Start](quick-start.md) — Hands-on examples
 - [Creating Quaternions Tutorial](../tutorials/creating-quaternions.md) — Detailed construction methods

@@ -8,7 +8,7 @@
 
 ## Standard Installation
 
-Install Hammy from PyPI using pip:
+Install Quatham from PyPI using pip:
 
 ```bash
 pip install hammy
@@ -16,7 +16,7 @@ pip install hammy
 
 ## Development Installation
 
-If you want to contribute to Hammy or use the latest development version:
+If you want to contribute to Quatham or use the latest development version:
 
 ```bash
 # Clone the repository
@@ -60,7 +60,7 @@ If you encounter compilation errors:
 
 ### NumPy Compatibility
 
-Hammy requires NumPy 2.0+. Check your version:
+Quatham requires NumPy 2.0+. Check your version:
 
 ```python
 import numpy as np

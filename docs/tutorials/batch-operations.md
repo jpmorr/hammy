@@ -1,10 +1,10 @@
 # Batch Operations
 
-This tutorial covers efficient batch processing of quaternion arrays in Hammy.
+This tutorial covers efficient batch processing of quaternion arrays in Quatham.
 
 ## Why Batch Operations?
 
-Hammy is designed for high-performance batch processing using Numba JIT compilation. Processing arrays of quaternions is significantly faster than looping:
+Quatham is designed for high-performance batch processing using Numba JIT compilation. Processing arrays of quaternions is significantly faster than looping:
 
 ```python
 import numpy as np

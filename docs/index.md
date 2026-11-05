@@ -1,11 +1,11 @@
-# Welcome to Hammy
+# Welcome to Quatham
 
-**Hammy** is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.
+**Quatham** (import as `hammy`) is a lightweight, high-performance quaternion mathematics package for 3D rotations. Built with NumPy and Numba acceleration, it provides efficient quaternion operations for both single quaternions and batched arrays.
 
 ## Quick Navigation
 
 ### Getting Started
-New to Hammy or quaternions? Start here.
+New to Quatham or quaternions? Start here.
 - [Installation](getting-started/installation.md)
 - [Quick Start](getting-started/quick-start.md)
 - [Basic Concepts](getting-started/concepts.md)

@@ -1,6 +1,6 @@
 # Creating Quaternions
 
-This tutorial covers all the different ways to create quaternions in Hammy.
+This tutorial covers all the different ways to create quaternions in Quatham.
 
 ## From Components
 
@@ -21,7 +21,7 @@ arr = np.array([1.0, 0.0, 0.0, 0.0])
 q = Quaternion(arr)
 ```
 
-**Remember**: Hammy uses scalar-first ordering `[w, x, y, z]`.
+**Remember**: Quatham uses scalar-first ordering `[w, x, y, z]`.
 
 ## From Euler Angles
 
@@ -103,7 +103,7 @@ q_deg = Quaternion.from_spherical(45, 60, degrees=True)
 
 ## From Rotation Matrix
 
-While Hammy doesn't have a direct `from_rotation_matrix()` method, you can convert via axis-angle:
+While Quatham doesn't have a direct `from_rotation_matrix()` method, you can convert via axis-angle:
 
 ```python
 # Given a rotation matrix

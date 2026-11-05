@@ -1,6 +1,6 @@
 # Quick Start
 
-This guide shows you how to get started with Hammy in just a few minutes.
+This guide shows you how to get started with Quatham in just a few minutes.
 
 ## Creating Your First Quaternion
 
@@ -72,7 +72,7 @@ yaw, pitch, roll = q.to_yaw_pitch_roll(degrees=True)
 
 ## Working with Arrays
 
-Hammy efficiently handles batches of quaternions:
+Quatham efficiently handles batches of quaternions:
 
 ```python
 # Create multiple quaternions

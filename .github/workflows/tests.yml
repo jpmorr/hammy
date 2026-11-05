@@ -38,16 +38,11 @@ jobs:
         run: |
           uv run pytest --cov --junitxml=junit.xml -o junit_family=legacy
 
-      - name: Upload coverage to Codecov
+      - name: Upload coverage and tests to Codecov
         uses: codecov/codecov-action@v5
+        if: always()
         with:
-          files: ./coverage.xml
+          files: ./coverage.xml,./junit.xml
           flags: python-${{ matrix.python-version }}
           verbose: true
-
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          files: ./junit.xml
-          flags: python-${{ matrix.python-version }}
+          disable_file_fixes: false

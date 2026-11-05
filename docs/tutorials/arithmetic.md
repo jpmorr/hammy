@@ -1,6 +1,6 @@
 # Quaternion Arithmetic
 
-This tutorial covers arithmetic operations with quaternions in Hammy.
+This tutorial covers arithmetic operations with quaternions in Quatham.
 
 ## Addition and Subtraction
 
@@ -72,7 +72,7 @@ The fundamental quaternion units follow:
 - `ji = -k`, `kj = -i`, `ik = -j`
 
 ```python
-# Verify with Hammy
+# Verify with Quatham
 qi = Quaternion([0.0, 1.0, 0.0, 0.0])
 qj = Quaternion([0.0, 0.0, 1.0, 0.0])
 qk = Quaternion([0.0, 0.0, 0.0, 1.0])

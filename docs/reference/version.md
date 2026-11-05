@@ -1,6 +1,6 @@
 # Version Information
 
-The current version of Hammy is dynamically determined from Git tags using `hatch-vcs`.
+The current version of Quatham is dynamically determined from Git tags using `hatch-vcs`.
 
 ## Checking Version
 
@@ -25,7 +25,7 @@ uv run python -m pip show hammy
 
 ## Version Scheme
 
-Hammy uses semantic versioning with automatic version generation from Git:
+Quatham uses semantic versioning with automatic version generation from Git:
 
 - **Tagged releases**: `1.0.0`, `1.0.1`, `2.0.0`, etc.
 - **Development versions**: `0.0.post19+g4e7ffc23a.d20261105`
