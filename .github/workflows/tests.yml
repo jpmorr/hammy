@@ -50,10 +50,8 @@ jobs:
 
       - name: Upload test results to Codecov
         uses: codecov/codecov-action@v4
-        if: always() && matrix.python-version == '3.12'
+        if: always()
         with:
           files: ./test-results.xml
-          flags: unittests
+          flags: unittests-python${{ matrix.python-version }}
           verbose: true
-          override_pr: ${{ github.event.pull_request.number }}
-          override_commit: ${{ github.sha }}
