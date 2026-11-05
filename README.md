@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/hammy.svg)](https://pypi.org/project/hammy/)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: BSD-3-Clause](https://img.shields.io/badge/license-BSD--3--Clause-yellow.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Documentation](https://img.shields.io/badge/docs-zensical-blue.svg)](https://jpmorrise.github.io/hammy/)
+[![Documentation](https://img.shields.io/badge/docs-zensical-blue.svg)](https://jpmorrise.github.io/hammy)
 
 [![Tests](https://github.com/jpmorrise/hammy/actions/workflows/tests.yml/badge.svg)](https://github.com/jpmorrise/hammy/actions)
 [![Coverage](https://codecov.io/gh/jpmorrise/hammy/branch/main/graph/badge.svg)](https://codecov.io/gh/jpmorrise/hammy)
