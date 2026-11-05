@@ -37,7 +37,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          uv run pytest --cov=src/hammy --cov-report=xml --junitxml=junit.xml -o junit_family=legacy
+          uv run pytest --cov=src/quatham --cov-report=xml --junitxml=junit.xml -o junit_family=legacy
 
       - name: Upload coverage and tests to Codecov
         uses: codecov/codecov-action@v5

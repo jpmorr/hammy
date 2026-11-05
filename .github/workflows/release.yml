@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/hammy/__version__.py'
+      - 'src/quatham/__version__.py'
 
 permissions:
   contents: write
@@ -22,7 +22,7 @@ jobs:
       - name: Get version from file
         id: version
         run: |
-          VERSION=$(grep -oP '__version__ = "\K[^"]+' src/hammy/__version__.py)
+          VERSION=$(grep -oP '__version__ = "\K[^"]+' src/quatham/__version__.py)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Detected version: $VERSION"
 
