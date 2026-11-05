@@ -1,8 +1,7 @@
 """
 Quatham version information.
 
-Note: The actual version is determined dynamically by hatch-vcs from Git tags.
-This file is a fallback for when Git metadata is not available.
+Updated dynamically by Hatch.
 """
 
-__version__ = "0.0.0-dev"
+__version__ = "0.2.0rc0"
