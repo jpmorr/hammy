@@ -38,7 +38,15 @@ jobs:
             --cov=hammy \
             --cov-report=term-missing \
             --cov-report=xml \
-            --junitxml=test-results.xml
+            --junitxml=test-results-${{ matrix.python-version }}.xml \
+            -o junit_family=legacy
+
+      - name: Verify test results file
+        run: |
+          echo "Test results file exists:"
+          ls -la test-results-*.xml
+          echo "First 20 lines:"
+          head -20 test-results-${{ matrix.python-version }}.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -52,6 +60,7 @@ jobs:
         uses: codecov/codecov-action@v4
         if: always()
         with:
-          files: ./test-results.xml
-          flags: unittests-python${{ matrix.python-version }}
+          files: ./test-results-${{ matrix.python-version }}.xml
+          flags: unittests
           verbose: true
+          disable_file_fixes: true
